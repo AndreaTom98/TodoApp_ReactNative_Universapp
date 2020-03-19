@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, ScrollView } from "react-native";
 
 export default class App extends React.Component {
   state = {
@@ -19,26 +19,22 @@ export default class App extends React.Component {
         todoList: prevState.todoList.concat(prevState.value)
       }
     })
-    this.setState({
-      value: ""
-    })
+    // this.setState({
+    //   value: ""
+    // })
   }
   render() {
-    const list = this.state.todoList.map(todo => {
-      return <Text>{todo}</Text>
+    const list = this.state.todoList.map((todo, index) => {
+      return <View style={styles.Output}><Text style={styles.Todo} key={index}>{todo}</Text></View>
     })
     return (
-      <View>
+      <ScrollView>
         <View style={styles.InputContainer}>
-          {/* Input */}
           <TextInput value={this.state.value} onChangeText={this.onChangeTextHandler} placeholder="scrivi todo" style={[styles.Input]} />
           <Button title="invia" onPress={this.addTodoHandler} />
         </View>
-        <View>
-          {/* Output */}
           {list}
-        </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -53,8 +49,19 @@ const styles = StyleSheet.create({
   },
   InputContainer: {
     padding: 50,
-    marginTop: 50,
+    marginTop: 20,
     flexDirection: "row",
     alignItems: "center"
+  },
+  Output: {
+    backgroundColor: 'blue',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 10,
+    marginVertical: 5,
+  },
+  Todo: {
+    color: 'white',
   }
+  
 });
