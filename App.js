@@ -4,9 +4,9 @@ import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 export default function App() {
   return (
     <View>
-      <View style={{padding: 50, marginTop: 50}}>
+      <View style={{padding: 50, marginTop: 50, flexDirection: 'row', alignItems: 'center'}}>
         {/* Input */}
-        <TextInput placeholder="scrivi todo" style={{borderBottomWidth: 1}} />
+        <TextInput placeholder="scrivi todo" style={styles.Input} />
         <Button title="invia" onPress={() => {}} />
       </View>
       <View>
@@ -21,7 +21,11 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 50,
+  Input: {
+    width: '80%',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingVertical: 5,
+    paddingLeft: 3,
   }
 });
