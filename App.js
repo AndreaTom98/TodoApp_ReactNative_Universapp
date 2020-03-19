@@ -4,22 +4,39 @@ import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 export default class App extends React.Component {
   state = {
     value: '',
-    todoList: []
+    todoList: [],
   }
   onChangeTextHandler = (text) => {
     this.setState({value: text})
   }
+
+  addTodoHandler = () => {
+    if (this.state.value.trim() === "") {
+      alert('Scrivi qualcosa')
+    }
+    this.setState(prevState => {
+      return {
+        todoList: prevState.todoList.concat(prevState.value)
+      }
+    })
+    this.setState({
+      value: ""
+    })
+  }
   render() {
+    const list = this.state.todoList.map(todo => {
+      return <Text>{todo}</Text>
+    })
     return (
       <View>
         <View style={styles.InputContainer}>
           {/* Input */}
           <TextInput value={this.state.value} onChangeText={this.onChangeTextHandler} placeholder="scrivi todo" style={[styles.Input]} />
-          <Button title="invia" onPress={() => {}} />
+          <Button title="invia" onPress={this.addTodoHandler} />
         </View>
         <View>
-          <Text></Text>
           {/* Output */}
+          {list}
         </View>
       </View>
     );
