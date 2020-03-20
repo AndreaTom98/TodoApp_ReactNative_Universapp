@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList, TouchableWithoutFeedback} from "react-native";
 
 export default class App extends React.Component {
   state = {
@@ -13,6 +13,7 @@ export default class App extends React.Component {
   addTodoHandler = () => {
     if (this.state.value.trim() === "") {
       alert('Scrivi qualcosa')
+      return
     }
     this.setState(prevState => {
       return {
@@ -34,7 +35,9 @@ export default class App extends React.Component {
           keyExtractor={item => item.uid}
           data={this.state.todoList}
           renderItem={item => (
-            <View style={styles.Output}><Text style={styles.Todo}>{item.item.value}</Text></View>
+            <TouchableWithoutFeedback onPress={() => console.warn('todo pressato')}>
+              <View style={styles.Output}><Text style={styles.Todo}>{item.item.value}</Text></View>
+            </TouchableWithoutFeedback>
           )} />
       </View>
     );
