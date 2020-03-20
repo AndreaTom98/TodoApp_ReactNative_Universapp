@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TextInput, Button, ScrollView } from "react-native";
+import { StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList } from "react-native";
 
 export default class App extends React.Component {
   state = {
@@ -16,7 +16,7 @@ export default class App extends React.Component {
     }
     this.setState(prevState => {
       return {
-        todoList: prevState.todoList.concat(prevState.value)
+        todoList: prevState.todoList.concat({value: prevState.value, uid: Math.random().toString()})
       }
     })
     // this.setState({
@@ -24,17 +24,19 @@ export default class App extends React.Component {
     // })
   }
   render() {
-    const list = this.state.todoList.map((todo, index) => {
-      return <View style={styles.Output}><Text style={styles.Todo} key={index}>{todo}</Text></View>
-    })
     return (
-      <ScrollView>
+      <View>
         <View style={styles.InputContainer}>
           <TextInput value={this.state.value} onChangeText={this.onChangeTextHandler} placeholder="scrivi todo" style={[styles.Input]} />
           <Button title="invia" onPress={this.addTodoHandler} />
         </View>
-          {list}
-      </ScrollView>
+          <FlatList
+          keyExtractor={item => item.uid}
+          data={this.state.todoList}
+          renderItem={item => (
+            <View style={styles.Output}><Text style={styles.Todo}>{item.item.value}</Text></View>
+          )} />
+      </View>
     );
   }
 }
