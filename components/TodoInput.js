@@ -29,7 +29,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     paddingVertical: 5,
-    paddingLeft: 3
+    paddingLeft: 3,
+    paddingVertical: 15,
+    fontSize: 18
   },
   InputContainer: {
     padding: 50,

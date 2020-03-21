@@ -1,26 +1,35 @@
 import React from "react";
-import { StyleSheet, TouchableWithoutFeedback, View, Text } from "react-native";
+import { StyleSheet, TouchableOpacity, View, Text } from "react-native";
 
 const Todo = (props) => {
   return (
-    <TouchableWithoutFeedback onPress={props.deleteTodo}>
       <View style={styles.Output}>
+        <TouchableOpacity onPress={props.deleteTodo}>
+          <Text style={styles.deleteButton}>X</Text>
+        </TouchableOpacity>
         <Text style={styles.Todo}>{props.title}</Text>
       </View>
-    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   Output: {
     backgroundColor: "blue",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     paddingVertical: 10,
-    marginVertical: 5
+    marginVertical: 5,
+    flexDirection: 'row'
   },
   Todo: {
-    color: "white"
+    color: "white",
+    marginLeft: 20,
+    fontSize: 18
+  },
+  deleteButton: {
+    color: 'red',
+    marginLeft: 15,
+    fontSize: 20
   }
 });
 
