@@ -3,7 +3,7 @@ import { StyleSheet, TouchableWithoutFeedback, View, Text } from "react-native";
 
 const Todo = (props) => {
   return (
-    <TouchableWithoutFeedback onPress={() => console.warn("todo pressato")}>
+    <TouchableWithoutFeedback onPress={props.deleteTodo}>
       <View style={styles.Output}>
         <Text style={styles.Todo}>{props.title}</Text>
       </View>

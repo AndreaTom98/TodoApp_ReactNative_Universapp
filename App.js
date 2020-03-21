@@ -7,6 +7,11 @@ export default class App extends React.Component {
   state = {
     todoList: [],
   }
+  deleteTodoHandler = (id) => {
+    this.setState({
+      todoList: this.state.todoList.filter(todo => todo.id !== id)
+    })
+  }
   addTodoHandler = (value) => {
     if (value.trim() === "") {
       alert('Scrivi qualcosa')
@@ -14,7 +19,7 @@ export default class App extends React.Component {
     }
     this.setState(prevState => {
       return {
-        todoList: prevState.todoList.concat({value: value, uid: Math.random().toString()})
+        todoList: prevState.todoList.concat({value: value, id: Math.random().toString()})
       }
     })
     // this.setState({
@@ -26,9 +31,8 @@ export default class App extends React.Component {
       <View>
           <TodoInput onAddTodo={this.addTodoHandler} />
           <FlatList
-          keyExtractor={item => item.uid}
           data={this.state.todoList}
-          renderItem={item => <Todo title={item.item.value} />} />
+          renderItem={item => <Todo deleteTodo={() => this.deleteTodoHandler(item.item.id)} title={item.item.value} />} />
       </View>
     );
   }
